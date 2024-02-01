@@ -1,5 +1,7 @@
 package com.training.aem.core.services.impl;
 
+import com.day.cq.replication.ReplicationActionType;
+import com.day.cq.replication.ReplicationException;
 import com.day.cq.replication.Replicator;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
@@ -13,6 +15,7 @@ import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import javax.jcr.Session;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +26,9 @@ public class PageServiceImpl implements PageService {
 
     @Reference
     ResourceResolverFactory resourceResolverFactory;
+
+    @Reference
+    Replicator replicator;
 
 
 
@@ -35,10 +41,14 @@ public class PageServiceImpl implements PageService {
 
 
         try (ResourceResolver resourceResolver = getResourceResolver()){
+
+            Session session = resourceResolver.adaptTo(Session.class);
+
             PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
             Page createdPage = pageManager.create(PARENT_PAGE_PATH,
                     productEntity.getTitle(),PAGE_TEMPLATE,
                     productEntity.getTitle(),true);
+            replicatePage(session,createdPage);
         } catch (WCMException | LoginException e) {
             throw new RuntimeException(e);
         }
@@ -50,6 +60,14 @@ public class PageServiceImpl implements PageService {
         Map<String, Object> map = new HashMap<>();
         map.put(ResourceResolverFactory.SUBSERVICE, "useruser");
         return resourceResolverFactory.getServiceResourceResolver(map);
+    }
+
+    private void replicatePage(Session session, Page page) {
+        try {
+            replicator.replicate(session, ReplicationActionType.ACTIVATE, page.getPath());
+        } catch (ReplicationException e) {
+            throw new RuntimeException("Failed to replicate the page", e);
+        }
     }
 
 }
