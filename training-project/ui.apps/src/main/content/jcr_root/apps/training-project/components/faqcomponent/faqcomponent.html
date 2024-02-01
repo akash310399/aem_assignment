@@ -1,0 +1,10 @@
+<!-- faqcomponent.html (Sightly script) -->
+<sly data-sly-use.model="com.training.aem.core.models.FaqComponentModel">
+    <div data-sly-list.faq="${model.faqList}">
+        <div class="faq-item">
+            <h3>${faq.question}</h3>
+            <p>${faq.answer}</p>
+        </div>
+    </div>
+</sly>
+
