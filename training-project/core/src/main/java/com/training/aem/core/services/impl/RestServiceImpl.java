@@ -15,4 +15,10 @@ public class RestServiceImpl implements RestService {
                 (CommonConstants.GET,mainUrl,null
                         ,null);
     }
+
+    @Override
+    public ClientResponse getProductDetailList(String mainUrl) throws Exception {
+        return CommonUtils.getClientResponse
+                (CommonConstants.GET,mainUrl,null,null);
+    }
 }

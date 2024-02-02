@@ -7,4 +7,6 @@ import java.util.List;
 public interface ProductDetailService {
 
     ProductEntity getProductsData(String mainURL);
+
+    List<ProductEntity> getProductList(String mainUrl);
 }
