@@ -1,0 +1,1 @@
+var sortByType = $(".data-attribute").attr("data-sortFiltersType");
