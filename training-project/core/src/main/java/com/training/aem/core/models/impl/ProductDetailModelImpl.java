@@ -11,6 +11,7 @@ import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
+import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 
@@ -31,6 +32,9 @@ public class ProductDetailModelImpl implements ProductDetailModel {
     @OSGiService
     ProductDetailService productDetailService;
 
+    @ScriptVariable
+    Page currentPage;
+
     private static final String BASE_URL = "https://fakestoreapi.com/products/";
 
     ProductEntity productEntity = new ProductEntity();
@@ -41,10 +45,6 @@ public class ProductDetailModelImpl implements ProductDetailModel {
 
     @PostConstruct
     void init() {
-        Page currentPage = Optional.ofNullable(request.getResourceResolver()
-                .adaptTo(PageManager.class))
-                .map(pm -> pm.getContainingPage(request.getResource()))
-                .orElse(null);
         if (currentPage != null) {
             ValueMap pageProperties = currentPage.getProperties();
             String productId = pageProperties.get("productId", String.class);
