@@ -32,6 +32,12 @@
                                         sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
                                         fieldLabel="Enter Your Product ID"
                                         name="./productId"/>
+                                    <customInheritedScript
+                                        jcr:primaryType="nt:unstructured"
+                                        sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                                        fieldDescription="Custom Inherited Script"
+                                        fieldLabel="Custom Script (Inherited)"
+                                        name="./customInheritedScript"/>
                                 </items>
                             </column>
                         </items>
