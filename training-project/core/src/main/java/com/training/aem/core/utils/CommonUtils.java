@@ -3,6 +3,7 @@ package com.training.aem.core.utils;
 import com.google.gson.Gson;
 import com.training.aem.core.CommonConstants;
 import com.training.aem.core.bean.ClientResponse;
+import com.training.aem.core.entities.ProductEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
@@ -19,6 +20,9 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import static org.apache.oltu.oauth2.common.message.types.TokenType.BEARER;
 
@@ -84,4 +88,28 @@ public final class CommonUtils {
         }
         return null;
     }
+
+
+    // Sort the product list based on the price
+    public static List<ProductEntity> sortProductEntitiesByPrice(List<ProductEntity> productEntityList, String sortOrder) {
+        Collections.sort(productEntityList, new Comparator<ProductEntity>() {
+            @Override
+            public int compare(ProductEntity product1, ProductEntity product2) {
+                // Assuming that ProductEntity has a getPrice() method
+                double price1 = product1.getPrice();
+                double price2 = product2.getPrice();
+
+                if ("asc".equalsIgnoreCase(sortOrder)) {
+                    return Double.compare(price1, price2);
+                } else if ("dsc".equalsIgnoreCase(sortOrder)) {
+                    return Double.compare(price2, price1);
+                } else {
+                    throw new IllegalArgumentException("Invalid sort order. Use 'ascending' or 'descending'.");
+                }
+            }
+        });
+
+        return productEntityList;
+    }
+
 }

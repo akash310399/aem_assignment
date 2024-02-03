@@ -45,4 +45,31 @@ public class ProductDetailServiceImpl implements ProductDetailService {
 
         return productEntity;
     }
+
+    @Override
+    public List<ProductEntity> getProductList(String mainUrl) {
+        List<ProductEntity> productEntityList = new ArrayList<>();
+        try{
+            ClientResponse clientResponse = restService.getProductDetailList(mainUrl);
+            if(clientResponse!=null &&
+                    clientResponse.getStatusCode() == HttpServletResponse.SC_OK){
+                String entityJson = clientResponse.getData();
+                JSONArray jsonArray = new JSONArray(entityJson);
+                if(jsonArray!=null){
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    productEntityList = objectMapper.readValue(
+                            String.valueOf(jsonArray),
+                            new TypeReference<List<ProductEntity>>() {
+                            }
+                    );
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return productEntityList;
+    }
+
+
 }

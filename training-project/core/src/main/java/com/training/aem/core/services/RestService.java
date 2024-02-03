@@ -6,4 +6,6 @@ public interface RestService {
 
     ClientResponse getProductDetails(String mainUrl) throws Exception;
 
+    ClientResponse getProductDetailList(String mainUrl) throws Exception;
+
 }
