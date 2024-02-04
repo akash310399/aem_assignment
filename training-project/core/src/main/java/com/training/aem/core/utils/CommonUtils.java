@@ -16,13 +16,13 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.request.RequestPathInfo;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import static org.apache.oltu.oauth2.common.message.types.TokenType.BEARER;
 
@@ -110,6 +110,23 @@ public final class CommonUtils {
         });
 
         return productEntityList;
+    }
+
+    //----------- Get params From URL -----------
+
+    public static List<String> getParamsFromURL(final SlingHttpServletRequest request){
+        RequestPathInfo requestPathInfo = request.getRequestPathInfo();
+        String suffix = requestPathInfo.getSuffix();
+        if(!suffix.isEmpty()){
+            String[] paramsArray = suffix.split("/");
+            List<String> paramsList = Arrays.asList(paramsArray);
+            List<String> params = new ArrayList<>(paramsList);
+            params.remove(0); //removing first index because there is a whitespace at 1st index
+
+            return params;
+        }
+
+        return new ArrayList<>();
     }
 
 }
