@@ -6,6 +6,9 @@ import com.training.aem.core.services.PageService;
 import com.training.aem.core.services.ProductDetailService;
 import org.apache.sling.commons.scheduler.ScheduleOptions;
 import org.apache.sling.commons.scheduler.Scheduler;
+import org.apache.sling.event.jobs.Job;
+import org.apache.sling.event.jobs.JobBuilder;
+import org.apache.sling.event.jobs.JobManager;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.osgi.service.component.annotations.*;
 import org.osgi.service.metatype.annotations.Designate;
@@ -13,6 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jcr.RepositoryException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 @Component(service = {Runnable.class},immediate = true, configurationPolicy = ConfigurationPolicy.REQUIRE)
@@ -25,11 +30,16 @@ public class PageScheduler implements Runnable{
     ProductDetailService productDetailService;
 
     @Reference
+    JobManager jobManager;
+
+    @Reference
     PageService pageService;
 
     private static final String BASE_URL = "https://fakestoreapi.com/products/";
 
     private static String PRODUCT_ID = "1";
+
+    public static String JOB_TOPIC = "training/pageJob";
 
 
     @Reference
@@ -60,18 +70,21 @@ public class PageScheduler implements Runnable{
         scheduler.unschedule(String.valueOf(schedulerId));
     }
 
+    public void startJob(){
+        Map<String,Object> propertyMap = new HashMap<>();
+        JobBuilder jobBuilder = jobManager.createJob(JOB_TOPIC);
+
+        propertyMap.put("name","PageScheduler");
+        propertyMap.put("schedulerId",schedulerId);
+
+        jobBuilder.properties(propertyMap);
+        jobBuilder.add();
+        jobManager.addJob(JOB_TOPIC,propertyMap);
+    }
+
     @Override
     public void run() {
-        log.info("page creation started here....");
-        ProductEntity productEntity = productDetailService.getProductsData(BASE_URL + PRODUCT_ID);
-        log.info("Product Entity of got from third party API: ", productEntity);
-        productEntity.setTitle("Testingpage");
-        try {
-            pageService.createPage(productEntity);
-        } catch (Exception e) {
-            log.error("Error during page creation:", e);
-        }
-
-        log.info("Page Created...");
+        log.info("Starting the sling job......");
+        startJob();
     }
 }
