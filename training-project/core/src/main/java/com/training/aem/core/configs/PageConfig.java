@@ -17,5 +17,5 @@ public @interface PageConfig {
             name = "Cron Expression",
             description = "Cron expression used by the scheduler",
             type = AttributeType.STRING)
-    public String cronExpression() default "0/20 * * * * ?";
+    public String scheduler_expression() default "";
 }

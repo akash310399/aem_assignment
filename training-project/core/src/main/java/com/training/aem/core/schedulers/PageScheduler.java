@@ -7,10 +7,7 @@ import com.training.aem.core.services.ProductDetailService;
 import org.apache.sling.commons.scheduler.ScheduleOptions;
 import org.apache.sling.commons.scheduler.Scheduler;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Deactivate;
-import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.*;
 import org.osgi.service.metatype.annotations.Designate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import javax.jcr.RepositoryException;
 import java.util.function.Predicate;
 
-@Component(service = {Runnable.class},immediate = true)
+@Component(service = {Runnable.class},immediate = true, configurationPolicy = ConfigurationPolicy.REQUIRE)
 @Designate(ocd = PageConfig.class)
 public class PageScheduler implements Runnable{
     private static final Logger log = LoggerFactory.getLogger(PageScheduler.class);
@@ -51,7 +48,7 @@ public class PageScheduler implements Runnable{
     }
 
     public void addScheduler(PageConfig config){
-        ScheduleOptions scheduleOptions = scheduler.EXPR(config.cronExpression());
+        ScheduleOptions scheduleOptions = scheduler.EXPR(config.scheduler_expression());
         scheduleOptions .name(String.valueOf(schedulerId));
         //scheduleOptions.canRunConcurrently(false);
         scheduler.schedule(this,scheduleOptions);
