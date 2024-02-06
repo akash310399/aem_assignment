@@ -19,7 +19,7 @@ import javax.jcr.Session;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component(service = {PageService.class})
+@Component(service = PageService.class)
 public class PageServiceImpl implements PageService {
 
 

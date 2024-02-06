@@ -72,13 +72,8 @@ public class PageScheduler implements Runnable{
 
     public void startJob(){
         Map<String,Object> propertyMap = new HashMap<>();
-        JobBuilder jobBuilder = jobManager.createJob(JOB_TOPIC);
-
         propertyMap.put("name","PageScheduler");
         propertyMap.put("schedulerId",schedulerId);
-
-        jobBuilder.properties(propertyMap);
-        jobBuilder.add();
         jobManager.addJob(JOB_TOPIC,propertyMap);
     }
 

@@ -1,16 +1,19 @@
 package com.training.aem.core.jobs;
 
+import com.adobe.cq.social.notifications.api.Notification;
 import com.training.aem.core.entities.ProductEntity;
 import com.training.aem.core.services.PageService;
 import com.training.aem.core.services.ProductDetailService;
 import org.apache.sling.event.jobs.Job;
 import org.apache.sling.event.jobs.consumer.JobConsumer;
+import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Component(service = {JobConsumer.class}
+@Component(service = JobConsumer.class,
+        immediate = true
         ,property = {JobConsumer.PROPERTY_TOPICS+"=training/pageJob"})
 public class PageSchedulerJob implements JobConsumer {
 
@@ -29,17 +32,23 @@ public class PageSchedulerJob implements JobConsumer {
     @Override
     public JobResult process(Job job) {
         log.info("Page creation started here....");
-        ProductEntity productEntity = productDetailService.getProductsData(BASE_URL+PRODUCT_ID);
-        log.info("Product Entity obtained from third-party API: {}", productEntity);
-        productEntity.setTitle("Testing-page");
+
         try {
-            pageService.createPage(productEntity);
+            ProductEntity productEntity = productDetailService.getProductsData(BASE_URL + PRODUCT_ID);
+            log.info("Product Entity obtained from third-party API: {}", productEntity);
+            if(productEntity!=null) {
+
+                productEntity.setTitle("Testingpage");
+
+                pageService.createPage(productEntity);
+
+                return JobResult.OK;
+            }
+
         } catch (Exception e) {
             log.error("Error during page creation:", e);
             return JobResult.FAILED;
         }
-
-        log.info("Page Created...");
-        return JobResult.OK;
+        return JobResult.FAILED;
     }
 }
