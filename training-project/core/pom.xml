@@ -170,6 +170,11 @@ Import-Package: javax.annotation;version=0.0.0,*
             <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.2</version>
+        </dependency>
 
 
         <!-- Testing -->
