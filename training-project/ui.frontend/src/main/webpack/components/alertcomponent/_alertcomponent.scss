@@ -1,0 +1,51 @@
+/* Style for the alert container */
+#alertContainer {
+    width: 100%;
+    max-width: 400px; /* Adjust the max-width as needed */
+    margin: 0 auto;
+  }
+  
+  /* Style for the alert */
+  .alert {
+    padding: 20px;
+    background-color: #f8d7da; /* Adjust colors as needed */
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  .alert strong {
+    color: #721c24; /* Adjust text color as needed */
+  }
+  
+  .alert button.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: #721c24; /* Adjust close button color as needed */
+    font-size: 20px;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .alert button.close:hover {
+    color: #c00; /* Adjust close button hover color as needed */
+  }
+  
+  .alert button.btn-secondary {
+    margin-top: 10px;
+    background-color: #dc3545; /* Adjust dismiss button background color as needed */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .alert button.btn-secondary:hover {
+    background-color: #c82333; /* Adjust dismiss button hover background color as needed */
+  }
+  
