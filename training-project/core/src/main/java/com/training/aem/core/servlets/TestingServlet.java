@@ -1,8 +1,12 @@
 package com.training.aem.core.servlets;
 
+import com.day.cq.mailer.MessageGateway;
+import com.day.cq.mailer.MessageGatewayService;
+import com.day.cq.mcm.emailprovider.EmailService;
 import com.training.aem.core.entities.ProductEntity;
 import com.training.aem.core.services.PageService;
 import com.training.aem.core.services.ReadExcelDataService;
+import org.apache.commons.mail.HtmlEmail;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.LoginException;
@@ -35,6 +39,9 @@ public class TestingServlet extends SlingSafeMethodsServlet {
     @Reference
     ResourceResolverFactory resourceResolverFactory;
 
+    @Reference
+    MessageGatewayService messageGatewayService;
+
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
 
@@ -44,13 +51,20 @@ public class TestingServlet extends SlingSafeMethodsServlet {
 //        pageService.createPage(productEntity);
 //
 //        response.getWriter().write("servlet called.....");
+//
+//        try {
+//            ResourceResolver resourceResolver = getResourceResolver();
+//            readExcelDataService.getDataFromExcel(resourceResolver,"/content/dam/training/mobileSheet.xlsx");
+//        } catch (LoginException e) {
+//            throw new RuntimeException(e);
+//        }
 
-        try {
-            ResourceResolver resourceResolver = getResourceResolver();
-            readExcelDataService.getDataFromExcel(resourceResolver,"/content/dam/training/mobileSheet.xlsx");
-        } catch (LoginException e) {
-            throw new RuntimeException(e);
-        }
+        MessageGateway<HtmlEmail> messageGateway = messageGatewayService.getGateway(HtmlEmail.class);
+
+        HtmlEmail htmlEmail = new HtmlEmail();
+        htmlEmail.set
+
+
 
 
     }
