@@ -1,6 +1,6 @@
 <sly data-sly-use.model="com.training.aem.core.models.ProductDetailModel">
     <h2>${model.productEntity.title}</h2>
-    <p>Price: ${model.productEntity.price}</p>
+    <p>Price: ${model.productEntity.price} ${caconfig['com.training.aem.core.caconfig.CurrencyCaConfig'].productCurrency} </p> 
     <p>Description: ${model.productEntity.description}</p>
     <p>Category: ${model.productEntity.category}</p>
     <p>Image: <img src="${model.productEntity.image}" alt="Product Image"></p>

@@ -26,6 +26,17 @@ public final class CommonConstants {
     public static final String LIMIT = "limit";
     public static final String OFFSET = "offset";
 
+    public static final String DAM_ASSET = "dam:Asset";
+    public static final String EXCEL_MIME_TYPE =
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+    public static final String TYPE_JCR_PATH = "JCR_PATH";
+    public static final String DAM_ROOT_PATH = "/content/dam/training";
+
+    public static final String ASSET_REPLACE_PATH = "/jcr:content"
+            + "/renditions/original";
+
+
 
 
 }
