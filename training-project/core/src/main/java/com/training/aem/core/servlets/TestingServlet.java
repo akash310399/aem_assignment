@@ -6,6 +6,7 @@ import com.day.cq.mcm.emailprovider.EmailService;
 import com.training.aem.core.entities.ProductEntity;
 import com.training.aem.core.services.PageService;
 import com.training.aem.core.services.ReadExcelDataService;
+import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
@@ -59,12 +60,19 @@ public class TestingServlet extends SlingSafeMethodsServlet {
 //            throw new RuntimeException(e);
 //        }
 
-        MessageGateway<HtmlEmail> messageGateway = messageGatewayService.getGateway(HtmlEmail.class);
+        try {
+            MessageGateway<HtmlEmail> messageGateway = messageGatewayService.getGateway(HtmlEmail.class);
 
-        HtmlEmail htmlEmail = new HtmlEmail();
-        htmlEmail.set
+            HtmlEmail email = new HtmlEmail();
+            String recipient = "akash31aks@gmail.com";
+            email.addTo(recipient);
+            email.setTextMsg("A new page has been created by useruser");
 
+            messageGateway.send(email);
 
+        } catch (EmailException e) {
+            throw new RuntimeException(e);
+        }
 
 
     }
