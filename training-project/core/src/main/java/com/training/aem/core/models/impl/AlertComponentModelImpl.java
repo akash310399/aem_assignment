@@ -61,6 +61,7 @@ public class AlertComponentModelImpl implements AlertComponentModel {
                 alertContentFragmentEntity.setAlert(alert);
                 alertContentFragmentEntity.setMessage(message);
 
+
                 fragmentEntities.add(alertContentFragmentEntity);
 
             }

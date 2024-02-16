@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class AlertContentFragmentEntity {
 
+    String name;
     String alert;
     String message;
 }

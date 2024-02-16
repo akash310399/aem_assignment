@@ -1,52 +1,66 @@
 
-/* Style for the alert container */
-#alertContainer {
-    width: 100%;
-    max-width: 200px; /* Adjust the max-width as needed */
-    margin: 0 auto;
-  }
-  
-  /* Style for the alert */
-  .alert {
-    padding: 20px;
-    background-color: #f8d7da; /* Adjust colors as needed */
-    border: 1px solid #f5c6cb;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    position: relative;
-  }
-  
-  .alert strong {
-    color: #721c24; /* Adjust text color as needed */
-  }
-  
-  .alert button.close {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    color: #721c24; /* Adjust close button color as needed */
-    font-size: 20px;
-    font-weight: bold;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .alert button.close:hover {
-    color: #c00; /* Adjust close button hover color as needed */
-  }
-  
-  .alert button.btn-secondary {
-    margin-top: 10px;
-    background-color: #dc3545; /* Adjust dismiss button background color as needed */
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .alert button.btn-secondary:hover {
-    background-color: #c82333; /* Adjust dismiss button hover background color as needed */
-  }
-  
+
+
+/* Heading styles */
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+/* Button styles */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+/* Alert styles */
+.alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.alert p {
+  margin: 0 0 10px;
+}
+
+.alert button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.alert button.close {
+  background-color: #dc3545;
+}
+
+.alert button:hover {
+  background-color: #0056b3;
+}
+
+.alert button.close:hover {
+  background-color: #c82333;
+}
