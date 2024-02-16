@@ -1,9 +1,11 @@
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html">
+<sly data-sly-call="${clientLib.all @ categories='alert-component'}"/>
 <sly data-sly-use.model="com.training.aem.core.models.AlertComponentModel" />
 
 <div id="alertContainer"></div>
 
 <sly data-sly-list.fragment="${model.fragmentEntities}">
-  <div class="alert" role="alert" data-alert-id="${fragment['@index']}" style="display: ${fragment['@index'] == 0 ? 'block' : 'none'}">
+  <div class="alert" role="alert" data-alert-id="${fragment['@index']}">
     <button type="button" class="close" aria-label="Close" onclick="closeAlert(this)">
       <span aria-hidden="true">&times;</span>
     </button>

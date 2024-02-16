@@ -1,7 +1,8 @@
+
 /* Style for the alert container */
 #alertContainer {
     width: 100%;
-    max-width: 400px; /* Adjust the max-width as needed */
+    max-width: 200px; /* Adjust the max-width as needed */
     margin: 0 auto;
   }
   
