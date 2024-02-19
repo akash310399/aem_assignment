@@ -12,6 +12,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ import java.util.List;
 
 @Component(service = {ProductDetailService.class})
 public class ProductDetailServiceImpl implements ProductDetailService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductDetailServiceImpl.class);
 
 
     @Reference
@@ -31,6 +35,7 @@ public class ProductDetailServiceImpl implements ProductDetailService {
         try {
             ClientResponse clientResponse = restService
                     .getProductDetails(mainURL);
+            LOGGER.debug("clientResponse form the restservice from the mainURL: {}", clientResponse);
             if (clientResponse != null
                     && clientResponse.getStatusCode()
                     == HttpServletResponse.SC_OK){
@@ -38,9 +43,11 @@ public class ProductDetailServiceImpl implements ProductDetailService {
                 ObjectMapper objectMapper = new ObjectMapper();
                 productEntity = objectMapper.readValue(responseObj.toString(), ProductEntity.class);
 
+                LOGGER.debug("product Entity object: {} ",productEntity);
+
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            LOGGER.debug("Failed to get the Product: ", e);
         }
 
         return productEntity;
@@ -51,6 +58,7 @@ public class ProductDetailServiceImpl implements ProductDetailService {
         List<ProductEntity> productEntityList = new ArrayList<>();
         try{
             ClientResponse clientResponse = restService.getProductDetailList(mainUrl);
+            LOGGER.debug("clientResponse form the restservice from the mainURL: {}", clientResponse);
             if(clientResponse!=null &&
                     clientResponse.getStatusCode() == HttpServletResponse.SC_OK){
                 String entityJson = clientResponse.getData();
@@ -62,10 +70,11 @@ public class ProductDetailServiceImpl implements ProductDetailService {
                             new TypeReference<List<ProductEntity>>() {
                             }
                     );
+                    LOGGER.debug("Product Entity list fetched from API: {}", productEntityList);
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            LOGGER.debug("Failed to get the product list from API {}", e);
         }
 
         return productEntityList;
