@@ -14,6 +14,8 @@ import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
@@ -24,6 +26,8 @@ import java.util.Optional;
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL,
         adapters = {ProductDetailModel.class})
 public class ProductDetailModelImpl implements ProductDetailModel {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductDetailModel.class);
 
 
     @Self
@@ -39,18 +43,33 @@ public class ProductDetailModelImpl implements ProductDetailModel {
 
     ProductEntity productEntity = new ProductEntity();
 
+
+    /**
+     * Retrieves the product entity.
+     * @return The product entity.
+     */
     public ProductEntity getProductEntity(){
         return productEntity;
     }
 
+
+    /**
+     * Initializes the product detail model by fetching product data based on the current page's product ID.
+     * It logs the fetched product data for debugging purposes.
+     */
     @PostConstruct
     void init() {
         if (currentPage != null) {
             ValueMap pageProperties = currentPage.getProperties();
             String productId = pageProperties.get("productId", String.class);
+
+            LOGGER.debug("Product Id fetched from current page property: {} ",productId);
+
             if(StringUtils.isNotEmpty(productId)){
                 String mainURL = BASE_URL + productId;
                 productEntity = productDetailService.getProductsData(mainURL);
+
+                LOGGER.debug("Product fetched from product Id: {}",productEntity);
             }
 
         }

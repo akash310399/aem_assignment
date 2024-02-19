@@ -81,5 +81,6 @@ public class PageScheduler implements Runnable{
     public void run() {
         log.info("Starting the sling job......");
         startJob();
+        log.debug("sling job has ended: ");
     }
 }
