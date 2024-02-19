@@ -21,6 +21,8 @@ import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.jcr.Session;
 import java.util.Date;
@@ -29,6 +31,8 @@ import java.util.Map;
 
 @Component(service = PageService.class)
 public class PageServiceImpl implements PageService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PageServiceImpl.class);
 
 
 
@@ -64,10 +68,11 @@ public class PageServiceImpl implements PageService {
             Page createdPage = pageManager.create(PARENT_PAGE_PATH,
                     productEntity.getTitle(),PAGE_TEMPLATE,
                     productEntity.getTitle(),true);
+            LOGGER.debug("Newly created page: {}", createdPage);
             replicatePage(session,createdPage);
             sendMailToAdmin();
         } catch (WCMException | LoginException e) {
-            throw new RuntimeException(e);
+            LOGGER.debug("Failed to create the page",e);
         }
 
 
@@ -83,7 +88,7 @@ public class PageServiceImpl implements PageService {
         try {
             replicator.replicate(session, ReplicationActionType.ACTIVATE, page.getPath());
         } catch (ReplicationException e) {
-            throw new RuntimeException("Failed to replicate the page", e);
+            LOGGER.debug("Failed to replicate the page",e);
         }
     }
 
@@ -105,7 +110,7 @@ public class PageServiceImpl implements PageService {
             messageGateway.send(email);
 
         } catch (EmailException e) {
-            throw new RuntimeException(e);
+            LOGGER.debug("Failed to send the Email to admin: {}", e);
         }
     }
 

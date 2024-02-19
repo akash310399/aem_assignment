@@ -11,6 +11,8 @@ import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -18,6 +20,8 @@ import java.util.List;
         adapters = {SingleProductModel.class},
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class SingleProductModelImpl implements SingleProductModel {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SingleProductModel.class);
 
     private static final String BASE_URL = "https://fakestoreapi.com/products/";
 
@@ -32,14 +36,22 @@ public class SingleProductModelImpl implements SingleProductModel {
     @Default(values = StringUtils.EMPTY)
     String productId;
 
+    /**
+     * Retrieves the product entity based on the product ID extracted from the URL.
+     *
+     * @return The product entity retrieved based on the product ID.
+     */
     public ProductEntity getProductEntity(){
         List<String> suffix = CommonUtils.getParamsFromURL(request);
 
+        LOGGER.debug("suffix fetched from current URL: {}",suffix);
 
         if(suffix.size()==2){
             productId = suffix.get(1);
             productEntity = productDetailService
                     .getProductsData(BASE_URL+productId);
+
+            LOGGER.debug("product entity based on the URL Suffix: {}", productEntity);
 
             return productEntity;
         }

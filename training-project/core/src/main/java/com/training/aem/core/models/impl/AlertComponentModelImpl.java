@@ -12,6 +12,8 @@ import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -22,6 +24,9 @@ import java.util.List;
         adapters = AlertComponentModel.class,
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class AlertComponentModelImpl implements AlertComponentModel {
+
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(AlertComponentModel.class);
 
     public static final String CF_PATH = "/content/dam/training-project/content-fragments";
     private static final String ALERT = "alert";
@@ -34,14 +39,22 @@ public class AlertComponentModelImpl implements AlertComponentModel {
 
     List<AlertContentFragmentEntity> fragmentEntities = new ArrayList<>();
 
+    /**
+     * Retrieves the list of fragment entities.
+     * @return List of AlertContentFragmentEntity objects.
+     */
     public List<AlertContentFragmentEntity> getFragmentEntities(){
         return fragmentEntities;
     }
 
 
+    /**
+     * Initializes the component by fetching content fragments and populating fragmentEntities list.
+     */
     @PostConstruct
     void init(){
         Resource contentFragmentsFolder = resourceResolver.getResource(CF_PATH);
+        LOGGER.debug("contentFragmentsFolder fetched from content fragment path",contentFragmentsFolder);
         if(contentFragmentsFolder.hasChildren() && contentFragmentsFolder!=null){
             Iterable<Resource> iterable = contentFragmentsFolder.getChildren();
             for(Resource child: iterable){
@@ -61,6 +74,7 @@ public class AlertComponentModelImpl implements AlertComponentModel {
                 alertContentFragmentEntity.setAlert(alert);
                 alertContentFragmentEntity.setMessage(message);
 
+                LOGGER.debug("alertContentFragmentEntity to be added in List: ",alertContentFragmentEntity);
 
                 fragmentEntities.add(alertContentFragmentEntity);
 

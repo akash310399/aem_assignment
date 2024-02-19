@@ -13,6 +13,8 @@ import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.osgi.service.component.annotations.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -25,6 +27,8 @@ import java.util.List;
 @Component(service = ReadExcelDataService.class)
 public class ReadExcelDataServiceImpl implements ReadExcelDataService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReadExcelDataServiceImpl.class);
+
     private static final String PARENT_PATH = "/content/training-project/mobilenodes";
 
     @Override
@@ -34,6 +38,7 @@ public class ReadExcelDataServiceImpl implements ReadExcelDataService {
         try {
             if (resource.isResourceType(CommonConstants.DAM_ASSET)) {
                 Asset asset = resource.adaptTo(Asset.class);
+                LOGGER.debug("Asset fetched from parent path: {}", asset);
 
                 if (asset.getMimeType()
                         .equalsIgnoreCase(CommonConstants.EXCEL_MIME_TYPE)) {
@@ -43,6 +48,7 @@ public class ReadExcelDataServiceImpl implements ReadExcelDataService {
                     XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
                     XSSFSheet sheet  =workbook.getSheetAt(0);
 
+                    LOGGER.debug("current Excel Sheet that got uploaded {}",sheet);
                     int row = sheet.getLastRowNum();
                     int col = sheet.getRow(0).getLastCellNum();
                     DataFormatter formatter = new DataFormatter();
@@ -63,11 +69,12 @@ public class ReadExcelDataServiceImpl implements ReadExcelDataService {
                         }
 
                     }
+                    LOGGER.debug("Final mobile entity list: {}",mobileEntities);
                     createNodeFromList(resolver,mobileEntities);
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LOGGER.debug("failed to get data from excel: {}", e);
         }
     }
 
@@ -76,6 +83,7 @@ public class ReadExcelDataServiceImpl implements ReadExcelDataService {
             Resource parentResource = resolver.getResource(PARENT_PATH);
             if (parentResource != null) {
                 Node parentNode = parentResource.adaptTo(Node.class);
+                LOGGER.debug("Parent node under which we need to create further nodes: {}",parentNode);
                 if (parentNode != null) {
                     for (MobileEntity mobileEntity : mobileEntities) {
                         String nodeName = "mobile_" + mobileEntity.getName(); // Generate a unique node name
@@ -86,13 +94,13 @@ public class ReadExcelDataServiceImpl implements ReadExcelDataService {
                         resolver.commit();
                     }
                 } else {
-                    throw new RuntimeException("Failed to adapt parent resource to a Node.");
+                    LOGGER.debug("Failed to adapt parent resource to a Node.");
                 }
             } else {
-                throw new RuntimeException("Parent resource not found at path: " + PARENT_PATH);
+                LOGGER.debug("Parent resource not found at path: {} ",PARENT_PATH);
             }
         } catch (RepositoryException | PersistenceException e) {
-            throw new RuntimeException("Error creating nodes", e);
+            LOGGER.debug("Failed to create nodes: {}", e);
         }
     }
 

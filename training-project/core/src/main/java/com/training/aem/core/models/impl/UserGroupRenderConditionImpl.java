@@ -15,6 +15,8 @@ import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.jcr.RepositoryException;
@@ -25,6 +27,9 @@ import java.util.Iterator;
         ,adapters = UserGroupRenderCondition.class
         ,defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class UserGroupRenderConditionImpl implements UserGroupRenderCondition {
+
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(UserGroupRenderCondition.class);
 
     @ScriptVariable
     SlingHttpServletRequest request;
@@ -37,15 +42,23 @@ public class UserGroupRenderConditionImpl implements UserGroupRenderCondition {
 
     boolean isInContentAuthorGroup = false;
 
+    /**
+     * Post construction method to initialize the model.
+     * It checks if the current user is a member of the specified group and sets a render condition accordingly.
+     */
     @PostConstruct
     void init(){
-        UserManager userManager = resourceResolver.adaptTo(UserManager.class);
+        UserManager userManager = resourceResolver
+                .adaptTo(UserManager.class);
+        LOGGER.debug("Current User manager: {}", userManager);
         if(userManager == null) return;
 
         boolean isInContentAuthorGroup = false;
 
         try{
-            Authorizable currentUser = userManager.getAuthorizable(resourceResolver.getUserID());
+            Authorizable currentUser = userManager
+                    .getAuthorizable(resourceResolver.getUserID());
+            LOGGER.debug("Current user is: ",currentUser);
             Iterator<Group> groupIterator = currentUser.memberOf();
             while(groupIterator.hasNext()){
                 Group userGroup = groupIterator.next();
@@ -60,7 +73,13 @@ public class UserGroupRenderConditionImpl implements UserGroupRenderCondition {
             throw new RuntimeException(e);
         }
 
-        request.setAttribute(RenderCondition.class.getName(),new SimpleRenderCondition(isInContentAuthorGroup));
+        LOGGER.debug("is Current user is a member of Author content group: {}"
+                ,isInContentAuthorGroup);
+
+        request.setAttribute(RenderCondition.class
+                .getName(),new SimpleRenderCondition(
+                        isInContentAuthorGroup)
+        );
     }
 
 }

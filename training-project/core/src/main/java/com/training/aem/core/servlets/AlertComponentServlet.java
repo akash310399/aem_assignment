@@ -24,10 +24,6 @@ import java.util.List;
 })
 public class AlertComponentServlet extends SlingSafeMethodsServlet {
 
-    public static final String CF_PATH = "/content/dam/training-project/content-fragments";
-    private static final String ALERT = "alert";
-    private static final String MESSAGE = "message";
-    private static final String SERVICE_USER = "useruser";
 
     @Reference
     private ResourceResolverFactory resourceResolverFactory;
@@ -35,6 +31,14 @@ public class AlertComponentServlet extends SlingSafeMethodsServlet {
     @Reference
     private AlertService alertService;
 
+    /**
+     * Handles HTTP GET requests.
+     *
+     * @param request  The HTTP servlet request.
+     * @param response The HTTP servlet response.
+     * @throws ServletException If an error occurs while processing the servlet request.
+     * @throws IOException      If an I/O error occurs while handling the servlet request.
+     */
     @Override
     protected void doGet(SlingHttpServletRequest request,SlingHttpServletResponse response) throws ServletException, IOException {
 
