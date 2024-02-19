@@ -13,6 +13,7 @@ import com.day.cq.wcm.api.PageManager;
 import com.day.cq.wcm.api.WCMException;
 import com.training.aem.core.entities.ProductEntity;
 import com.training.aem.core.services.PageService;
+import com.training.aem.core.services.SendNotificationService;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.sling.api.resource.LoginException;
@@ -45,12 +46,12 @@ public class PageServiceImpl implements PageService {
     @Reference
     MessageGatewayService messageGatewayService;
 
+    @Reference
+    SendNotificationService notificationService;
+
     private static final String RECIPIENT_MAIL = "akash31aks@gmail.com";
     private static final String SERVICE_USER = "useruser";
 
-
-    @Reference
-    NotificationService notificationService;
 
     private static final String PARENT_PAGE_PATH = "/content/training-project/us";
 
@@ -71,6 +72,7 @@ public class PageServiceImpl implements PageService {
             LOGGER.debug("Newly created page: {}", createdPage);
             replicatePage(session,createdPage);
             sendMailToAdmin();
+            notificationService.setTaskNotification(resourceResolver,SERVICE_USER,PARENT_PAGE_PATH);
         } catch (WCMException | LoginException e) {
             LOGGER.debug("Failed to create the page",e);
         }
