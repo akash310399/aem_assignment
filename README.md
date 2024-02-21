@@ -1,22 +1,22 @@
 This project comprises the implementation of various functionalities and components within an AEM (Adobe Experience Manager) environment. Below is a list of tasks completed along with a brief description of each:
 
-Create a project using archetype: Utilized archetype to create a new AEM project.
-Create FAQ Component: Developed a component that accepts input for questions and answers from a multi-field.
-Create Flexible Media Component: Designed a component allowing users to input either image paths or video URLs.
-Product Detail Component: Implemented a component that retrieves product details from a third-party API based on the provided product ID.
-Scheduler for Content Creation: Developed a scheduler to pull content from a third-party API and create pages in AEM using a specified template at a specific parent path.
-Carousel Component for Products: Created a carousel component that dynamically pulls products based on the price range authored by the author.
-Dynamic Product Information Component: Developed a component that renders product information based on request parameters by making calls to a third-party API.
-Dynamic Script Tag Rendering: Implemented a dynamic flow where script tags are authored at the parent page level and rendered on child pages.
-Workflow for Excel Sheet Upload: Created a workflow triggered by the upload of an Excel sheet to a specific DAM folder, parsing product-related values and storing them in the node structure.
-Servlet for Product Carousel Sorting: Developed a servlet that responds with ordered product data based on specified sort types.
-Test Cases: Wrote test cases for each functionality implemented.
-Sling Job Listener for Page Creation: Developed a Sling job listener that notifies admin via email and AEM console when a page is created.
-Environment Specific Scheduler Configuration: Ensured the scheduler triggers only in the author environment and created configs for running in stage run mode.
-Auto-Populate Product Search: Implemented auto-populate search functionality for products based on user input.
-Alert Component: Created an alert component pulling content from a parent path in a content fragment, with the ability to close the notification and persist its state.
-Conditional Dialog Field: Added a field in the dialog that is visible only to users added to the content authors group.
-Currency Configuration: Utilized CA configurations to display product prices based on user location and authored values.
+* Create Project Using Archetype: Utilized archetype to create a new AEM project.
+* Create FAQ Component: Developed a component that accepts input for questions and answers from a multi-field.
+* Create Flexible Media Component: Designed a component allowing users to input either image paths or video URLs.
+* Product Detail Component: Implemented a component that retrieves product details from a third-party API based on the provided product ID.
+* Scheduler for Content Creation: Developed a scheduler to pull content from a third-party API and create pages in AEM using a specified template at a specific parent path.
+* Carousel Component for Products: Created a carousel component that dynamically pulls products based on the price range authored by the author.
+* Dynamic Product Information Component: Developed a component that renders product information based on request parameters by making calls to a third-party API.
+* Dynamic Script Tag Rendering: Implemented a dynamic flow where script tags are authored at the parent page level and rendered on child pages.
+* Workflow for Excel Sheet Upload: Created a workflow triggered by the upload of an Excel sheet to a specific DAM folder, parsing product-related values and storing them in the node structure.
+* Servlet for Product Carousel Sorting: Developed a servlet that responds with ordered product data based on specified sort types.
+* Test Cases: Wrote test cases for each functionality implemented.
+* Sling Job Listener for Page Creation: Developed a Sling job listener that notifies admin via email and AEM console when a page is created.
+* Environment Specific Scheduler Configuration: Ensured the scheduler triggers only in the author environment and created configs for running in stage run mode.
+* Auto-Populate Product Search: Implemented auto-populate search functionality for products based on user input.
+* Alert Component: Created an alert component pulling content from a parent path in a content fragment, with the ability to close the notification and persist its state.
+* Conditional Dialog Field: Added a field in the dialog that is visible only to users added to the content authors group.
+* Currency Configuration: Utilized CA configurations to display product prices based on user location and authored values.
 
 
 Component, models and services structure:
