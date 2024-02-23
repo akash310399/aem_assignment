@@ -1,0 +1,2 @@
+1.Kindly add test cases for all the classes. As of now the coverage is comming to be 4 % only. We need atleast 60 % of coverage to clear the cloudmanager pipeline as per the standard.
+![img.png](img.png)
