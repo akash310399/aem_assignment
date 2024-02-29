@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2024-02-15T11:15:28.643+05:30"
+        cq:lastModifiedBy="admin"
+        cq:lastRolledout="{Date}2024-02-13T17:07:41.636+05:30"
+        cq:lastRolledoutBy="admin"
+        cq:redirectTarget="/content/training-project/in/en"
+        cq:template="/conf/training-project/settings/wcm/templates/page-content"
+        jcr:mixinTypes="[cq:LiveRelationship,cq:LiveSync]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="in"
+        sling:configRef="/conf/training-project/sling:configs/in/en"
+        sling:resourceType="training-project/components/page"
+        customInheritedScript="&lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.js&quot; integrity=&quot;sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=&quot; crossorigin=&quot;anonymous&quot;>&lt;/script>">
+        <cq:LiveSyncConfig
+            cq:excludedPaths="[ca-config-us]"
+            cq:isDeep="{Boolean}true"
+            cq:master="/content/training-project/us"
+            cq:rolloutConfigs="[]"
+            jcr:primaryType="cq:LiveCopy"/>
+    </jcr:content>
+    <en/>
+    <ja/>
+    <ca-config-india/>
+</jcr:root>

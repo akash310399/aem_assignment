@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:contextHubPath="/etc/cloudsettings/default/contexthub"
+        cq:contextHubSegmentsPath="/etc/segmentation/contexthub"
+        cq:lastModified="{Date}2024-02-23T13:47:58.909+05:30"
+        cq:lastModifiedBy="translation-job-service"
+        cq:lastTranslationUpdate="{Date}2024-02-23T13:47:58.909+05:30"
+        cq:template="/conf/training-project/settings/wcm/templates/page-content"
+        cq:translationSourcePath="/content/training-project/in/en/product-1"
+        cq:translationStatus="DRAFT"
+        jcr:mixinTypes="[]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Product-1"
+        sling:resourceType="training-project/components/page"
+        customInheritedScript="&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js&quot; integrity=&quot;sha512-E1dSFxg+wsfJ4HKjutk/WaCzK7S2wv1POn1RRPGh8ZK+ag9l244Vqxji3r6wgz9YBf6+vhQEYJZpSjqWFPg9gg==&quot; crossorigin=&quot;anonymous&quot; referrerpolicy=&quot;no-referrer&quot;>&lt;/script>&#xd;&#xa;&#xd;&#xa;&lt;script src=&quot;https://code.jquery.com/jquery-3.7.1.js&quot; integrity=&quot;sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=&quot; crossorigin=&quot;anonymous&quot;>&lt;/script>"
+        productId="6">
+        <root
+            jcr:mixinTypes="[]"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="training-project/components/container"
+            layout="responsiveGrid">
+            <container
+                jcr:mixinTypes="[]"
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="training-project/components/container"
+                layout="responsiveGrid">
+                <title
+                    jcr:mixinTypes="[]"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="training-project/components/title"/>
+                <container
+                    jcr:mixinTypes="[]"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="training-project/components/container"
+                    layout="responsiveGrid">
+                    <alertcomponent
+                        jcr:created="{Date}2024-02-15T17:01:07.208+05:30"
+                        jcr:createdBy="admin"
+                        jcr:lastModified="{Date}2024-02-15T17:01:07.208+05:30"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="training-project/components/alertcomponent"/>
+                    <faqcomponent
+                        jcr:created="{Date}2024-02-17T11:20:45.784+05:30"
+                        jcr:createdBy="admin"
+                        jcr:lastModified="{Date}2024-02-17T11:20:53.300+05:30"
+                        jcr:lastModifiedBy="admin"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="training-project/components/faqcomponent">
+                        <faqFields jcr:primaryType="nt:unstructured">
+                            <item0
+                                jcr:primaryType="nt:unstructured"
+                                faqAnswer="its Hawa hawa"
+                                faqQuestion="What is Air"/>
+                        </faqFields>
+                    </faqcomponent>
+                </container>
+            </container>
+        </root>
+    </jcr:content>
+</jcr:root>

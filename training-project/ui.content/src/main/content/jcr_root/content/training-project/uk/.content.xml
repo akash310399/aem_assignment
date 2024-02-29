@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2024-02-13T17:46:39.264+05:30"
+        cq:lastModifiedBy="admin"
+        cq:lastRolledout="{Date}2024-02-13T17:43:12.870+05:30"
+        cq:lastRolledoutBy="admin"
+        cq:redirectTarget="/content/training-project/uk/en"
+        cq:template="/conf/training-project/settings/wcm/templates/page-content"
+        jcr:mixinTypes="[cq:LiveRelationship,cq:LiveSync]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="uk"
+        sling:configRef="/conf/training-project/sling:configs/uk/en"
+        sling:resourceType="training-project/components/page">
+        <cq:LiveSyncConfig
+            cq:isDeep="{Boolean}true"
+            cq:master="/content/training-project/us"
+            cq:rolloutConfigs="[]"
+            jcr:primaryType="cq:LiveCopy"/>
+    </jcr:content>
+    <en/>
+    <ca-config-us/>
+</jcr:root>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2024-02-13T17:43:31.328+05:30"
+        cq:lastModifiedBy="admin"
+        cq:lastRolledout="{Date}2024-02-13T17:43:13.130+05:30"
+        cq:lastRolledoutBy="admin"
+        cq:propertyInheritanceCancelled="[jcr:title]"
+        cq:template="/apps/training-project/templates/caconfigurations"
+        jcr:mixinTypes="[cq:LiveRelationship,cq:PropertyLiveSyncCancelled]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="ca-config-uk"
+        sling:resourceType="wcm-io/caconfig/editor/components/page/editor"/>
+</jcr:root>
