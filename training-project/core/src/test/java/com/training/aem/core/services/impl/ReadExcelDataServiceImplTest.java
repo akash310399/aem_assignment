@@ -57,13 +57,9 @@ class ReadExcelDataServiceImplTest {
 
         Asset asset = mock(Asset.class);
         Rendition rendition = mock(Rendition.class);
-        XSSFWorkbook workbook = mock(XSSFWorkbook.class);
-        XSSFSheet sheet1 = mock(XSSFSheet.class);
-        InputStream inputStream = mock(InputStream.class);
-//        byte[] excelData = createExcelData();
-//
-//        // Create ByteArrayInputStream from the byte array
-//        InputStream inputStream = new ByteArrayInputStream(excelData);
+
+
+        InputStream inputStream = rendition.getStream();
 
 
 
@@ -74,34 +70,14 @@ class ReadExcelDataServiceImplTest {
         when(resource.adaptTo(Asset.class)).thenReturn(asset);
         when(asset.getMimeType()).thenReturn(CommonConstants.EXCEL_MIME_TYPE);
         when(asset.getOriginal()).thenReturn(rendition);
+        XSSFSheet sheet = mock(XSSFSheet.class);
 
-        //doReturn(workbook).when(new XSSFWorkbook(inputStream));
-
-
-
+        XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+        when(workbook.getSheetAt(0)).thenReturn(sheet);
 
 
         readExcelDataService.getDataFromExcel(resourceResolver,"/content/test");
 
     }
-
-
-    private byte[] createExcelData() throws IOException {
-        // Use Apache POI to create an XSSFWorkbook with your desired data
-        try (XSSFWorkbook workbook = new XSSFWorkbook()) {
-            XSSFSheet sheet = workbook.createSheet("Sheet1");
-            Row row = sheet.createRow(0);
-            Cell cell = row.createCell(0);
-            cell.setCellValue("Hello, World!");
-
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            workbook.write(outputStream);
-
-            return outputStream.toByteArray();
-        }
-
-    }
-
-
 
 }
