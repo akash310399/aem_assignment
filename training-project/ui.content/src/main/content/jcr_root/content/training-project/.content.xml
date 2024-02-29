@@ -2,13 +2,12 @@
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
-        cq:allowedTemplates="[/conf/training-project/settings/wcm/templates/(?!xf-).*]"
+        cq:allowedTemplates="[/conf/training-project/settings/wcm/templates/(?!xf-).*,/apps/training-project/templates/.*]"
         cq:conf="/conf/training-project"
         cq:redirectTarget="/content/training-project/us/en"
         cq:template="/conf/training-project/settings/wcm/templates/page-content"
         jcr:primaryType="cq:PageContent"
         jcr:title="Training Project"
-        sling:configRef="/conf/training-project"
         sling:redirect="{Boolean}true"
         sling:redirectStatus="{Long}302"
         sling:resourceType="training-project/components/page">
@@ -17,4 +16,23 @@
         </image>
     </jcr:content>
     <us/>
+    <uk/>
+    <in/>
+    <mobilenodes jcr:primaryType="nt:unstructured">
+        <mobile_s25
+            jcr:primaryType="nt:unstructured"
+            brand="samsung"
+            name="s25"
+            price="{Double}999.0"/>
+        <mobile_iphone_x0020_16
+            jcr:primaryType="nt:unstructured"
+            brand="apple"
+            name="iphone 16"
+            price="{Double}999.0"/>
+        <mobile_pixel_x0020_9
+            jcr:primaryType="nt:unstructured"
+            brand="google"
+            name="pixel 9"
+            price="{Double}999.0"/>
+    </mobilenodes>
 </jcr:root>

@@ -6,6 +6,9 @@
         <div data-sly-test="${model.contentType == 'image'}">
             <img src="${model.image}">
         </div>
+        <div data-sly-test="${model.contentType == 'video'}">
+            <iframe width="560" height="315" src="${model.video}" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
 
     <div data-sly-test="${!model.contentType}">

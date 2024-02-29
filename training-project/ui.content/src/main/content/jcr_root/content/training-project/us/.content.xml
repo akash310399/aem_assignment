@@ -2,10 +2,24 @@
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
+        cq:lastModified="{Date}2024-02-05T19:17:58.117+05:30"
+        cq:lastModifiedBy="admin"
         cq:redirectTarget="/content/training-project/us/en"
         cq:template="/conf/training-project/settings/wcm/templates/page-content"
         jcr:primaryType="cq:PageContent"
         jcr:title="us"
-        sling:resourceType="training-project/components/page"/>
+        sling:configRef="/conf/training-project/sling:configs/us/en"
+        sling:resourceType="training-project/components/page"
+        customInheritedScript="&lt;script> alert(&quot;root page&quot;) &lt;/script>"/>
     <en/>
+    <ca-config-us/>
+    <Testingpage/>
+    <Testingpage0/>
+    <Testingpage1/>
+    <Testingpage2/>
+    <Testingpage3/>
+    <Testingpage4/>
+    <Testingpage5/>
+    <Testingpage6/>
+    <Testingpage7/>
 </jcr:root>
