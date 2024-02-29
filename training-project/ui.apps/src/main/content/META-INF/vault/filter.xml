@@ -3,4 +3,6 @@
     <filter root="/apps/training-project/clientlibs"/>
     <filter root="/apps/training-project/components"/>
     <filter root="/apps/training-project/i18n"/>
+    <filter root="/apps/training-project/renderconditions"/>
+    <filter root="/apps/training-project/templates"/>
 </workspaceFilter>
