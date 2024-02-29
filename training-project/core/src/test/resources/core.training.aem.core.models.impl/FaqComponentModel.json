@@ -1,0 +1,18 @@
+{
+  "FaqComponentModel": {
+    "jcr:primaryType": "nt:unstructured",
+    "jcr:createdBy": "admin",
+    "jcr:lastModifiedBy": "admin",
+    "jcr:created": "Wed Feb 14 2024 15:49:27 GMT+0530",
+    "jcr:lastModified": "Wed Feb 14 2024 15:49:35 GMT+0530",
+    "sling:resourceType": "training-project/components/faqcomponent",
+    "faqFields": {
+      "jcr:content": "nt:unstructured",
+      "item0": {
+        "jcr:primaryType": "nt:unstructured",
+        "faqQuestion": "What is Air",
+        "faqAnswer": "its Hawa hawa"
+      }
+    }
+  }
+}

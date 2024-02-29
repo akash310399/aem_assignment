@@ -50,8 +50,6 @@ public class ReadExcelDataServiceImpl implements ReadExcelDataService {
 
                     LOGGER.debug("current Excel Sheet that got uploaded {}",sheet);
                     int row = sheet.getLastRowNum();
-                    int col = sheet.getRow(0).getLastCellNum();
-                    DataFormatter formatter = new DataFormatter();
                     for (int i = 1; i <= row; i++) {
                         XSSFRow currentRow = sheet.getRow(i);
                         if(currentRow!=null){
