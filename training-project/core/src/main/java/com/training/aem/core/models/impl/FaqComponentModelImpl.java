@@ -1,7 +1,6 @@
 package com.training.aem.core.models.impl;
 
 import com.training.aem.core.entities.FaqEntity;
-import com.training.aem.core.models.AlertComponentModel;
 import com.training.aem.core.models.FaqComponentModel;
 import lombok.Data;
 import org.apache.sling.api.SlingHttpServletRequest;
