@@ -48,7 +48,7 @@ public class SearchProductServlet extends SlingSafeMethodsServlet {
         // Convert results to JSON
         Gson gson = new Gson();
         String json = gson.toJson(results);
-
+        response.getWriter().write(json);
         // Write JSON to response
         response.getWriter().write(json);
     }
