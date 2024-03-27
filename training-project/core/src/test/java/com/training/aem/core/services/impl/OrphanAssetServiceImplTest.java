@@ -2,6 +2,9 @@ package com.training.aem.core.services.impl;
 
 import com.day.cq.commons.jcr.JcrConstants;
 import com.day.cq.dam.api.Asset;
+import com.day.cq.search.Query;
+import com.day.cq.search.QueryBuilder;
+import com.day.cq.search.result.SearchResult;
 import com.training.aem.core.CommonConstants;
 import io.wcm.testing.mock.aem.junit5.AemContext;
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
@@ -33,6 +36,12 @@ class OrphanAssetServiceImplTest {
 
     @Mock
     ResourceResolver resourceResolver;
+
+    @Mock
+    QueryBuilder queryBuilder;
+
+    @Mock
+    Iterator<Resource> iterator;
 
 
 
@@ -69,25 +78,37 @@ class OrphanAssetServiceImplTest {
 
     @Test
     void clearOrphanAsset() throws RepositoryException {
-        // Mock objects
-//        String finalPath = "/content/training/us";
-//        Asset asset = mock(Asset.class);
-//        List<Asset> orphanAssetsToDelete = Collections.singletonList(asset);
-//        Session session = mock(Session.class);
-//        ResourceResolver resourceResolver = mock(ResourceResolver.class);
-//
-//        when(resourceResolver.adaptTo(Session.class)).thenReturn(session);
-//
-//        orphanAssetService.clearOrphanAsset(resourceResolver, finalPath);
-//
-//        verify(resourceResolver).adaptTo(Session.class);
-//        verify(session).refresh(false);
-//        verify(session).removeItem(finalPath);
-//        verify(session).save();
+        String finalPath = "/content/training/us";
+        Asset asset = mock(Asset.class);
+        List<Asset> orphanAssetsToDelete = Collections.singletonList(asset);
+        Session session = mock(Session.class);
+        ResourceResolver resourceResolver = mock(ResourceResolver.class);
+
+        when(resourceResolver.adaptTo(Session.class)).thenReturn(session);
+
+        orphanAssetService.clearOrphanAsset(resourceResolver, finalPath);
+
 
     }
 
     @Test
     void getAllOrphanAssets() {
+        String finalPath = "somePath";
+        Session session = mock(Session.class);
+        Query query = mock(Query.class);
+        Resource resource = mock(Resource.class);
+        SearchResult searchResult = mock(SearchResult.class);
+        Asset asset = mock(Asset.class);
+
+        when(resourceResolver.adaptTo(Session.class)).thenReturn(session);
+        when(queryBuilder.createQuery(any(),eq(session))).thenReturn(query);
+        when(query.getResult()).thenReturn(searchResult);
+
+        when(searchResult.getResources()).thenReturn(iterator);
+        when(iterator.hasNext()).thenReturn(true,false);
+        when(iterator.next()).thenReturn(resource);
+        when(resource.adaptTo(Asset.class)).thenReturn(asset);
+
+        orphanAssetService.getAllOrphanAssets(resourceResolver,finalPath);
     }
 }
