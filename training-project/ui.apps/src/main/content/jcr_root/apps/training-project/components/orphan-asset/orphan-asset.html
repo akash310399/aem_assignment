@@ -1,0 +1,16 @@
+
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+    <sly data-sly-call="${clientlib.all @ categories='orphan-asset'}"/>
+</sly>
+
+<div class="dropdown">
+    <label for="project">Project:</label>
+    <select class="project" id="project">
+    </select>
+
+    <label for="locale">Locale:</label>
+    <select class="locale" id="locale">
+    </select>
+
+    <button class="button" id="fetchDataBtn">Fetch Data</button>
+</div>

@@ -1,0 +1,34 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+    <sly data-sly-call="${clientlib.all @ categories='orphan-asset-listing'}"/>
+</sly>
+<script id="assetTemplate" type="text/x-handlebars-template">
+{{#if assets.length}}
+{{#each assets}}
+<tr>
+    <td>{{name}}</td>
+    <td>{{path}}</td>
+</tr>
+{{/each}}
+{{else}}
+<tr>
+    <td colspan="2" class="noAssetsFound">No orphan assets found</td>
+</tr>
+{{/if}}
+</script>
+
+<!-- HTML structure -->
+<table class="custom-table">
+    <thead>
+        <tr>
+            <th>Asset Name</th>
+            <th>Asset Path</th>
+        </tr>   
+    </thead>
+    <tbody id="assetTableBody">
+        <!-- Data rows will be inserted here dynamically -->
+    </tbody>
+</table>
+<div class="actionButtons">
+    <button class="deleteButton" id="deleteAllBtn">Delete All</button>
+    <button onclick="window.history.back();" class="goBackButton">Go Back</button>
+</div>

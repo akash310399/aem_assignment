@@ -23,6 +23,8 @@ import org.apache.sling.api.resource.ValueMap;
 import org.json.JSONArray;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -36,6 +38,8 @@ public class OrphanAssetServiceImpl implements OrphanAssetService {
     QueryBuilder queryBuilder;
 
     private List<Asset> orphanAssetsToDelete = new ArrayList<>();
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrphanAssetService.class);
 
 
 
